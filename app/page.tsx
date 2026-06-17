@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import doctorwithchild from "@/assets/doctorwithchild.jpg"
 import { 
   FaPhone, 
   FaWhatsapp, 
@@ -98,11 +99,12 @@ export default function Home() {
   ]
 
   const gallery = [
-    { src: "https://coresg-normal.trae.ai/api/v1/text-to-image?prompt=hospital%20reception%20desk%20child%20friendly%20colorful%20modern&size=square", title: "Reception" },
-    { src: "https://coresg-normal.trae.ai/api/v1/text-to-image?prompt=doctor%20consultation%20room%20pediatric%20colorful%20friendly&size=square", title: "Consultation Room" },
-    { src: "https://coresg-normal.trae.ai/api/v1/text-to-image?prompt=child%20care%20play%20area%20colorful%20toys%20hospital&size=square", title: "Child Care Area" },
-    { src: "https://coresg-normal.trae.ai/api/v1/text-to-image?prompt=vaccination%20room%20hospital%20clean%20modern%20pediatric&size=square", title: "Vaccination Room" },
-    { src: "https://coresg-normal.trae.ai/api/v1/text-to-image?prompt=hospital%20exterior%20building%20modern%20pediatric&size=square", title: "Hospital Exterior" },
+    { src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800", title: "Reception" },
+    { src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800", title: "Consultation Room" },
+    { src: "https://images.unsplash.com/photo-1548690329-c3c4b1e9b702?auto=format&fit=crop&q=80&w=800", title: "Child Care Area" },
+    { src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800", title: "Vaccination Room" },
+    { src: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&q=80&w=800", title: "Hospital Exterior" },
+    { src: "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&q=80&w=800", title: "Waiting Area" },
   ]
 
   const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
@@ -210,7 +212,7 @@ export default function Home() {
             >
               <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://coresg-normal.trae.ai/api/v1/text-to-image?prompt=pediatrician%20doctor%20with%20smiling%20child%20friendly%20hospital%20background%20warm%20colors&size=square"
+                  src={doctorwithchild}
                   alt="Doctor with Child"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -268,17 +270,34 @@ export default function Home() {
             {whyChooseUs.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -10 }}
+                transition={{ 
+                  delay: i * 0.12,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15
+                }}
+                whileHover={{ 
+                  y: -12, 
+                  scale: 1.03,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
               >
-                <Card className="h-full text-center">
+                <Card className="h-full text-center overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow">
                   <CardHeader>
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <motion.div 
+                      className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+                      whileHover={{ 
+                        scale: 1.2, 
+                        rotate: 360, 
+                        backgroundColor: "rgba(59, 130, 246, 0.2)",
+                        transition: { duration: 0.5 }
+                      }}
+                    >
                       <div className="text-primary text-2xl">{item.icon}</div>
-                    </div>
+                    </motion.div>
                     <CardTitle className="text-lg">{item.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -303,24 +322,43 @@ export default function Home() {
             {services.map((service, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30, scale: 0.9 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -5 }}
+                transition={{ 
+                  delay: i * 0.1, 
+                  type: "spring", 
+                  stiffness: 120 
+                }}
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.02, 
+                  transition: { type: "spring", stiffness: 400 }
+                }}
               >
-                <Card className="h-full">
+                <Card className="h-full overflow-hidden border-none shadow-md hover:shadow-2xl transition-all">
                   <CardHeader>
-                    <div className="text-primary mb-2">{service.icon}</div>
+                    <motion.div 
+                      className="text-primary mb-2"
+                      whileHover={{ 
+                        scale: 1.15, 
+                        rotate: 10,
+                        transition: { type: "spring" }
+                      }}
+                    >
+                      {service.icon}
+                    </motion.div>
                     <CardTitle>{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground text-sm">{service.description}</p>
                   </CardContent>
                   <CardFooter>
-                    <Button variant="ghost" className="text-primary hover:text-primary/80 p-0">
-                      Learn More <FaChevronRight className="ml-2 w-4 h-4" />
-                    </Button>
+                    <motion.div whileHover={{ x: 5 }}>
+                      <Button variant="ghost" className="text-primary hover:text-primary/80 p-0">
+                        Learn More <FaChevronRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </motion.div>
                   </CardFooter>
                 </Card>
               </motion.div>
@@ -430,24 +468,72 @@ export default function Home() {
             {testimonials.map((testimonial, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.8, rotate: i % 2 === 0 ? -3 : 3 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
+                transition={{ 
+                  delay: i * 0.2, 
+                  type: "spring", 
+                  stiffness: 200, 
+                  damping: 15 
+                }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -10,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
               >
-                <Card className="h-full">
+                <Card className="h-full overflow-hidden border-none shadow-md hover:shadow-2xl bg-white/90 backdrop-blur">
                   <CardHeader>
-                    <div className="flex gap-1 mb-4">
+                    <motion.div 
+                      className="flex gap-1 mb-4"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.2 + 0.1, type: "spring" }}
+                    >
                       {[...Array(testimonial.rating)].map((_, j) => (
-                        <FaStar key={j} className="text-yellow-400" />
+                        <motion.div 
+                          key={j}
+                          initial={{ scale: 0, rotate: 180 }}
+                          whileInView={{ scale: 1, rotate: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.2 + 0.15 + j * 0.05, type: "spring" }}
+                        >
+                          <FaStar className="text-yellow-400" />
+                        </motion.div>
                       ))}
-                    </div>
+                    </motion.div>
                     <CardContent className="p-0">
-                      <p className="text-muted-foreground italic mb-6">"{testimonial.text}"</p>
+                      <motion.p 
+                        className="text-muted-foreground italic mb-6"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.2 + 0.3 }}
+                      >
+                        "{testimonial.text}"
+                      </motion.p>
                     </CardContent>
                     <CardFooter className="p-0 flex flex-col items-start">
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.child}</p>
+                      <motion.p 
+                        className="font-semibold"
+                        initial={{ x: -20, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.2 + 0.4 }}
+                      >
+                        {testimonial.name}
+                      </motion.p>
+                      <motion.p 
+                        className="text-sm text-muted-foreground"
+                        initial={{ x: -20, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.2 + 0.45 }}
+                      >
+                        {testimonial.child}
+                      </motion.p>
                     </CardFooter>
                   </CardHeader>
                 </Card>
@@ -559,21 +645,55 @@ export default function Home() {
             {gallery.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative group overflow-hidden rounded-xl"
+                initial={{ 
+                  opacity: 0, 
+                  y: 50, 
+                  rotate: i % 2 === 0 ? -5 : 5,
+                  scale: 0.8
+                }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0, 
+                  rotate: 0,
+                  scale: 1
+                }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ 
+                  delay: i * 0.15,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 12
+                }}
+                className="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl"
+                whileHover={{ 
+                  scale: 1.05,
+                  zIndex: 10,
+                  transition: { type: "spring", stiffness: 400, damping: 10 }
+                }}
               >
-                <img
+                <motion.img
                   src={item.src}
                   alt={item.title}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-64 object-cover"
+                  whileHover={{ 
+                    scale: 1.2,
+                    transition: { duration: 0.5 }
+                  }}
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <p className="text-white font-medium">{item.title}</p>
-                </div>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 flex items-end p-6"
+                  initial={{ y: "100%" }}
+                  whileHover={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+                >
+                  <motion.p 
+                    className="text-white font-bold text-lg"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1, transition: { delay: 0.1 } }}
+                  >
+                    {item.title}
+                  </motion.p>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -700,13 +820,67 @@ export default function Home() {
         </div>
       </footer>
 
-      <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="fixed bottom-24 right-6 z-40 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-        <FaWhatsapp className="text-white text-2xl" />
-      </a>
+      <motion.a 
+        href="https://wa.me/919999999999" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="fixed bottom-24 right-6 z-40 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg"
+        whileHover={{ scale: 1.15, rotate: 10 }}
+        animate={{ 
+          scale: [1, 1.05, 1],
+        }}
+        transition={{ 
+          scale: {
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }
+        }}
+      >
+        <motion.div
+          animate={{ 
+            rotate: [0, 10, -10, 0],
+          }}
+          transition={{ 
+            duration: 2.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <FaWhatsapp className="text-white text-2xl" />
+        </motion.div>
+      </motion.a>
 
-      <a href="tel:+919999999999" className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-        <FaPhone className="text-white text-xl" />
-      </a>
+      <motion.a 
+        href="tel:+919999999999" 
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-lg"
+        whileHover={{ scale: 1.15 }}
+        animate={{ 
+          scale: [1, 1.08, 1],
+        }}
+        transition={{ 
+          scale: {
+            duration: 1.8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }
+        }}
+      >
+        <motion.div
+          animate={{ 
+            rotate: [0, -10, 10, 0],
+          }}
+          transition={{ 
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        >
+          <FaPhone className="text-white text-xl" />
+        </motion.div>
+      </motion.a>
 
       <AnimatePresence>
         {scrolled && (
